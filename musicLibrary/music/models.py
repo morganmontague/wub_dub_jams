@@ -11,12 +11,12 @@ class Song(models.Model):
         # related_name="menu_item_by_cuisines",
         on_delete=models.CASCADE,
     null=True)
-    # playlist = models.ManyToManyField(
-    #     "Playlist",
-    #     )
-    # album = models.ManyToManyField(
-    #     "Album",
-    #     )
+    playlist = models.ManyToManyField(
+        "Playlist",
+        )
+    album = models.ManyToManyField(
+        "Album",
+        )
     # artist = models.ManyToManyField(
     #     "Artist",
     #     )
@@ -34,10 +34,10 @@ class Genre(models.Model):
     def __str__(self):
         return self.title
 
-# class Album(models.Model):
-#     album_title = models.CharField(max_length=40, null=True, default="Single")
-#     def __str__(self):
-#         return self.title
+class Album(models.Model):
+    album_title = models.CharField(max_length=40, null=True, default="Single")
+    def __str__(self):
+        return self.title
 
 # class Artist(models.Model):
 #     album_title = models.CharField(max_length=40, null=False, default="Unknown")
