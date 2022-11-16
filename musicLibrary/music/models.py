@@ -17,9 +17,9 @@ class Song(models.Model):
     album = models.ManyToManyField(
         "Album",
         )
-    # artist = models.ManyToManyField(
-    #     "Artist",
-    #     )
+    artist = models.ManyToManyField(
+        "Artist",
+        )
     def __str__(self):
         return self.title
 
@@ -39,7 +39,7 @@ class Album(models.Model):
     def __str__(self):
         return self.title
 
-# class Artist(models.Model):
-#     album_title = models.CharField(max_length=40, null=False, default="Unknown")
-#     def __str__(self):
-#         return self.title
+class Artist(models.Model):
+    album_title = models.CharField(max_length=40, null=False, default="Unknown")
+    def __str__(self):
+        return self.title
