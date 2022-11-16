@@ -25,21 +25,21 @@ class Song(models.Model):
 
 
 class Playlist(models.Model):
-    genre_title = models.CharField(max_length=40, null=False, default="Playlist Wub Dub")
+    playlist_title = models.CharField(max_length=40, null=False, default="Playlist Wub Dub")
     def __str__(self):
-        return self.title
+        return self.playlist_title
 
 class Genre(models.Model):
     genre_title = models.CharField(max_length=40, null=False, default="Unknown")
     def __str__(self):
-        return self.title
+        return self.genre_title
 
 class Album(models.Model):
     album_title = models.CharField(max_length=40, null=True, default="Single")
     def __str__(self):
-        return self.title
+        return self.album_title
 
 class Artist(models.Model):
-    album_title = models.CharField(max_length=40, null=False, default="Unknown")
+    artist_title = models.CharField(max_length=40, null=False, default="Unknown")
     def __str__(self):
-        return self.title
+        return self.artist_title
