@@ -7,7 +7,7 @@ class GenreSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Genre
-        fields = ["genre_title"]
+        exclude = ['id']
     # def create(self, validated_data):
     #     print(validated_data)
     #     obj_genre, created = Genre.objects.get_or_create(genre_title = [validated_data])
@@ -20,28 +20,28 @@ class AlbumSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Album
-        fields = "__all__"
+        exclude = ['id']
 
 class ArtistSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Artist
-        fields = "__all__"
+        exclude = ['id']
 
 class PlaylistSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Playlist
-        fields = "__all__"
+        exclude = ['id']
 
 class SongSerializer(serializers.ModelSerializer):
     genre = GenreSerializer()
-    # album = AlbumSerializer()
-    # artist = ArtistSerializer()
-    # playlist = PlaylistSerializer()
+    album = AlbumSerializer(many=True)
+    artist = ArtistSerializer(many=True)
+    playlist = PlaylistSerializer(many=True)
     class Meta:
         model = Song
-        fields = "__all__"
+        exclude = ['id']
     # def create(self, validated_data):
     #     album = validated_data.pop('album')
     #     obj_album, created = Album.objects.get_or_create(album_title = album['album_title'])

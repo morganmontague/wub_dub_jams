@@ -8,38 +8,41 @@ class Song(models.Model):
     explicit = models.BooleanField()
     genre = models.ForeignKey(
         "Genre",
-        # related_name="menu_item_by_cuisines",
         on_delete=models.CASCADE,
-    null=True)
+        null=True
+    )
     playlist = models.ManyToManyField(
         "Playlist",
+        related_name="playlist_songs"
         )
     album = models.ManyToManyField(
         "Album",
+        related_name="album_songs"
         )
     artist = models.ManyToManyField(
         "Artist",
+        related_name="related_songs"
         )
     def __str__(self):
         return self.title
 
 
 class Playlist(models.Model):
-    playlist_title = models.CharField(max_length=40, null=False, default="Playlist Wub Dub")
+    playlist_title = models.CharField(max_length=40, default="Playlist Wub Dub")
     def __str__(self):
         return self.playlist_title
 
 class Genre(models.Model):
-    genre_title = models.CharField(max_length=40, null=False, default="Unknown")
+    genre_title = models.CharField(max_length=40, default="Unknown")
     def __str__(self):
         return self.genre_title
 
 class Album(models.Model):
-    album_title = models.CharField(max_length=40, null=True, default="Single")
+    album_title = models.CharField(max_length=40, default="Single")
     def __str__(self):
         return self.album_title
 
 class Artist(models.Model):
-    artist_title = models.CharField(max_length=40, null=False, default="Unknown")
+    artist_title = models.CharField(max_length=40, default="Unknown")
     def __str__(self):
         return self.artist_title
