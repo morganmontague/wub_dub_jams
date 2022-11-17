@@ -22,9 +22,9 @@ class playlistfield(serializers.RelatedField):
     def to_internal_value(self, data):
         return Playlist.objects.get(name=data)
 
-class genrefield(serializers.RelatedField):
-    def to_representation(self, instance):
-        return instance.title
+# class genrefield(serializers.RelatedField):
+#     def to_representation(self, instance):
+#         return instance.genre_title
 
-    def to_internal_value(self, data):
-        return Genre.objects.get(name=data)
+#     def to_internal_value(self, data):
+#         return Genre.objects.get(name=data)

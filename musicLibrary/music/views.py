@@ -5,7 +5,7 @@ from .serializers import GenreSerializer, SongSerializer, ArtistSerializer, Albu
 from .models import Song, Album, Playlist, Genre, Artist
 from django.forms.models import model_to_dict
 from django.http.response import Http404
-# from rest_framework.views import APIView
+from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 # Create your views here.
@@ -37,60 +37,66 @@ class PlaylistViewSet(ModelViewSet):
 
 
 
-# class GenreAPIView(APIView):
-#     def get_object(Self, pk):
-#         try:
-#             return Genre.get(pk = pk)
-#         except Genre.DoesNotExist:
-#             raise Http404
 
-#     def get(self, request, pk=None, format=None):
-#         if pk:
-#             data = self.get_object(pk)
-#             serializer = GenreSerializer(data)
 
-#         else:
-#             data = Genre.objects.all()
-#             serializer = GenreSerializer(data, many=True)
+class GenreAPIView(APIView):
+    def get_object(Self, pk):
+        try:
+            return Genre.objects.get(pk = pk)
+        except Genre.DoesNotExist:
+            raise Http404
 
-#             return Response(serializer.data)
+    def get(self, request, pk=None, format=None):
+        if pk:
+            data = self.get_object(pk)
+            serializer = GenreSerializer(data)
 
-#     # Create
-#     def post(self, request, format=None):
-#         data =request.data
-#         serializer = GenreSerializer(data=data)
+        else:
+            data = Genre.objects.all()
+            serializer = GenreSerializer(data, many=True)
 
-#         # Check if True
-#         serializer.is_valid(raise_exception=True)
+        return Response(serializer.data)
 
-#         # Save the data
-#         serializer.save()
+    # Create
+    def post(self, request, format=None):
+        data =request.data
+        serializer = GenreSerializer(data=data)
 
-#         response = Response()
+        # Check if True
+        serializer.is_valid(raise_exception=True)
 
-#         response.data = {
-#             "message": 'Success, Posted a Genre',
-#             "data": serializer.data,
-#         }
+        # Save the data
+        serializer.save()
 
-#         return response
+        response = Response()
 
-#     def put(self, request, pk=None, format=None):
-#         print("Update")
-#         genre_Update = Genre.object.get(pk=pk)
-#         data = request.data
-#         serializer = GenreSerializer(instance=genre_Update, data=data, partial=True)
+        response.data = {
+            "message": 'Success, Posted a Genre',
+            "data": serializer.data,
+        }
 
-#         serializer_is_valid(raise_exception=True)
-#         serializer.save()
+        return response
 
-#         response = Response()
+    def put(self, request, pk=None, format=None):
+        genre_Update = Genre.objects.get(pk=pk)
+        data = request.data
+        serializer = GenreSerializer(instance=genre_Update, data=data, partial=True)
 
-#         response.data = {
-#             'message': "Genre Updated",
-#             'data': serializer.data
-#         }
-#         return response
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        response = Response()
+
+        response.data = {
+            'message': "Genre Updated",
+            'data': serializer.data
+        }
+        return response
+    
+    # def patch():
+    #     pass
+    # def delete():
+        pass
 
         
 
