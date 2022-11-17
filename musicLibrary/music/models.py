@@ -9,7 +9,8 @@ class Song(models.Model):
     genre = models.ForeignKey(
         "Genre",
         on_delete=models.CASCADE,
-        null=True
+        null=True,
+        related_name="genre_songs"
     )
     playlist = models.ManyToManyField(
         "Playlist",

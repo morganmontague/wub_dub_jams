@@ -6,9 +6,10 @@ from .fields import *
 
 class GenreSerializer(serializers.ModelSerializer):
     
+
     class Meta:
         model = Genre
-        exclude = ['id']
+        fields = "__all__"
     # def create(self, validated_data):
     #     print(validated_data)
     #     obj_genre, created = Genre.objects.get_or_create(genre_title = [validated_data])
@@ -18,22 +19,24 @@ class GenreSerializer(serializers.ModelSerializer):
 
 
 class AlbumSerializer(serializers.ModelSerializer):
-    
+    album_songs = albumfield(many=True, queryset=Album.objects.all())
+
     class Meta:
         model = Album
-        exclude = ['id']
+        fields = "__all__"
 
 class ArtistSerializer(serializers.ModelSerializer):
-    
+    related_songs = artistfield(many=True, queryset=Song.objects.all())
+
     class Meta:
         model = Artist
-        exclude = ['id']
+        fields = "__all__"
 
 class PlaylistSerializer(serializers.ModelSerializer):
-    
+    playlist_songs = playlistfield(many=True, queryset=Playlist.objects.all())
     class Meta:
         model = Playlist
-        exclude = ['id']
+        fields = "__all__"
 
 class SongSerializer(serializers.ModelSerializer):
     genre = GenreSerializer()
@@ -42,7 +45,7 @@ class SongSerializer(serializers.ModelSerializer):
     playlist = PlaylistSerializer(many=True)
     class Meta:
         model = Song
-        exclude = ['id']
+        fields = "__all__"
     # def create(self, validated_data):
     #     album = validated_data.pop('album')
     #     obj_album, created = Album.objects.get_or_create(album_title = album['album_title'])
