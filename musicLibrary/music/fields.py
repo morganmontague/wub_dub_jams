@@ -26,5 +26,6 @@ class playlistfield(serializers.RelatedField):
 #     def to_representation(self, instance):
 #         return instance.genre_title
 
-#     def to_internal_value(self, data):
-#         return Genre.objects.get(name=data)
+# def to_internal_value(self, data):
+#         obj, created = Album.objects.get_or_create(**data)
+#         return obj
