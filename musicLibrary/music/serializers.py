@@ -46,6 +46,37 @@ class SongSerializer(serializers.ModelSerializer):
         model = Song
         fields = "__all__"
 
+class ShortGenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        fields = "__all__"
+
+class ShortAlbumSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Album
+        fields = "__all__"
+
+class ShortArtistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artist
+        fields = "__all__"
+
+class ShortPlaylistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Playlist
+        fields = "__all__"
+
+class ShortSongSerializer(serializers.ModelSerializer):
+    genre = ShortGenreSerializer()
+    album = ShortAlbumSerializer(many=True, read_only=True)
+    artist = ShortArtistSerializer(many=True, read_only=True)
+    playlist = ShortPlaylistSerializer(many=True, read_only=True)
+    class Meta:
+        model = Song
+        fields = "__all__"
+
+
+
 
     # def create(self, validated_data):
     # #     album = validated_data.pop('album')

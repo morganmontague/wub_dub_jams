@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions
-from .serializers import GenreSerializer, SongSerializer, ArtistSerializer, AlbumSerializer, PlaylistSerializer
+from .serializers import *
 from .models import Song, Album, Playlist, Genre, Artist
 from django.forms.models import model_to_dict
 from django.http.response import Http404
@@ -33,6 +33,11 @@ class AlbumViewSet(ModelViewSet):
 class PlaylistViewSet(ModelViewSet):
     queryset = Playlist.objects.all()
     serializer_class = PlaylistSerializer
+    http_method_names=['get', 'post', 'put', 'delete']
+
+class ShortSongViewSet(ModelViewSet):
+    queryset = Song.objects.all()
+    serializer_class = ShortSongSerializer
     http_method_names=['get', 'post', 'put', 'delete']
 
 

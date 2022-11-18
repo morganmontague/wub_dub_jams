@@ -8,6 +8,7 @@ router.register(r'genres', GenreViewSet)
 router.register(r'artists', ArtistViewSet)
 router.register(r'albums', AlbumViewSet)
 router.register(r'playlists', PlaylistViewSet)
+router.register(r'shortsongs', ShortSongViewSet)
 
 
 
